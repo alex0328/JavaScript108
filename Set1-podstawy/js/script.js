@@ -8,6 +8,7 @@ console.log('zadanie 1:')
 
 let str = "Akademia108"
 
+
 const reverseStr = str => str.split('').reverse().join('')
 
 
@@ -20,10 +21,11 @@ console.log(rev)
 console.log('-------------------------------')
 console.log('zadanie 2:')
 
-const sortoStrz = str => str.split('').filter(el => isNaN(el)).sort()
-
-let srt = sortoStrz(str)
+const sortoStrz = str => 
+    str.split('').filter(el => isNaN(el)).sort()
+let srt = sortoStrz(str).join('')
 console.log(srt)
+
 
 // Zadanie #51066: 3-suma-iloczyn
 // Napisz funkcję ze zmiennymi lokalnymi, która policzy sumę i iloczyn elementów tablicy [1, 2, 3, 4, 5, 6]. 
@@ -55,7 +57,7 @@ console.log('zadanie 4:')
 let digiArr2 = [0,1,2,3,4,5]
 
 const quoterSum = digiArr2 => {
-    let qsum = 1
+    let qsum = 0
     digiArr2.forEach(element => qsum += Math.pow(element,2)
     )
     console.log(`Suma kwadratów tablicy wynosi: ${qsum}`)
@@ -172,10 +174,48 @@ console.log(coutReaded(arrBooks))
 
 
 
-
+// Zaimplementuj funkcję, która sortuje tablicę przez bąbelkowanie.
+// Funkcja przyjmuje parametr - tj. tablicę do posortowania, a zwraca posortowaną tablicę.
+// Wywołaj funkcję z tablicą [12, 67, 34, 23.01, 24, 2, 56, 8, 0x10, 23.02, 78, 34, 1e2, 45, 67, 98, 1]. Wynik jej działania wyświetl w konsoli.
+// Podpowiedź przed wysłaniem zadania do sprawdzenia:
+// - znajdź w internecie opis działania sortowania bąbelkowego
+// - zastosuj pętlę w pętli :)
 console.log('-------------------------------')
 console.log('zadanie 8:')
 
 
+let digiArray = [12, 67, 34, 23.01, 24, 2, 56, 8, 0x10, 23.02, 78, 34, 1e2, 45, 67, 98, 1]
 
- 
+
+const sortArray = arr => {
+    let n = arr.length;
+    for (i=0; i<n; i++) {
+        console.log(i)
+    }
+
+}
+
+
+console.log(sortArray(digiArray))
+
+console.log('-------------------------------')
+console.log('zadanie 9:')
+
+// ES5
+
+function iloczyn(num1, num2, num3) {
+    let result = num1 * num2 * num3
+    return result
+}
+
+let wynikIloczynu = iloczyn(2,3,4)
+
+console.log(wynikIloczynu)
+
+// ES6
+
+const iloczyn2 = (num1, num2, num3) => num1 * num2 * num3
+
+let wynikIloczynu2 = iloczyn2(2,3,4)
+
+console.log(wynikIloczynu2)
