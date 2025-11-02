@@ -140,7 +140,8 @@ class Ksiazka {
   
     bookDescription() {
       const isReadedDesc = this.isReaded ? "została przeczytana" : "nie została przeczytana";
-      console.log(`Książka ma tytuł "${this.title}", autorem jest ${this.author} i ${isReadedDesc}.`);
+      let desc = `Książka ma tytuł "${this.title}", autorem jest ${this.author} i ${isReadedDesc}.`;
+      return desc
     }
   }
 

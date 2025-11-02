@@ -14,15 +14,16 @@ console.log("Zadanie 1")
 let cities = ['Warsaw', 'Berlin', 'Paris', 'London', 'New York', 'Tokio', 'Moscow'];
 let task1 = document.getElementById('task1')
 const fragment = document.createDocumentFragment();
-let ul = document.createElement("ul")
-task1.appendChild(ul)
+let ol = document.createElement("ol")
+task1.appendChild(ol)
 cities.forEach(city => {
-    let liInUl = ul.appendChild(document.createElement("li"))
-    liInUl.textContent = city
-    fragment.appendChild(liInUl)
+    let liInOl = ol.appendChild(document.createElement("li"))
+    liInOl.textContent = city
+    liInOl.className = "city"
+    fragment.appendChild(liInOl)
 })
 
-ul.appendChild(fragment)
+ol.appendChild(fragment)
 
 // Zadanie 2
 // Dodaj poniższą listę w znaczniku body:
@@ -47,10 +48,11 @@ ul.appendChild(fragment)
 let buttons = document.querySelectorAll("button");
 
 buttons.forEach((but, index) => {
-    but.id = "buttonNumber"+index+1
+    let ultimateId = index+1
+    but.id = "buttonNumber"+ultimateId 
 })
 
-let btn = document.getElementById("buttonNumber01")
+const btn = document.getElementById("buttonNumber1")
 btn.onclick = function() {
     let items = document.getElementById("items").children;
     let nextItemNumber = 0
@@ -64,14 +66,88 @@ btn.onclick = function() {
 
 
 
+
 // Zadanie 3
+// Warsztat
+// Stwórz plik index.html z pełną strukturą strony HTML5, a w nim 2 paragrafy oraz przycisk z napisem „Ustaw tło paragrafów”.
+
+// Ustaw nasłuch zdarzenia click dla przycisku i po kliknięciu wywołuj funkcję zwrotną (ang. callback) o nazwie setBackground() (funkcję musisz stworzyć samodzielnie).
+
+// W funkcji setBackground() zmień style paragrafów, ustawiając kolor tła:
+
+// pierwszego paragrafu na czerwony
+// drugiego paragrafu na żółty.
+
+//pierwsza wersja
+
+// const btn2 = document.getElementById("buttonNumber2")
+// btn2.onclick = (event) => {
+//     console.log("-----------------------")
+//     let paragraphs = document.getElementById("task3").getElementsByTagName("p")
+//     i = 0
+//     for (let paragraph of paragraphs) {
+//         if (i===0) {
+//             paragraph.style.backgroundColor = "red";
+//         }
+//         else {
+//             paragraph.style.backgroundColor = "blue";
+//         }
+//         i++
+//         }
+// }
+
+// druga wersja:
+
+const btn2 = document.getElementById("buttonNumber2");
+btn2.onclick = () => {
+    let paragraphs = document.getElementById("task3").getElementsByTagName("p");
+    Array.from(paragraphs).forEach((paragraph, i) => {
+        if (i===0) {
+            paragraph.style.backgroundColor = "red";
+        }
+        else {
+            paragraph.style.backgroundColor = "blue";
+        }
+        i++
+        })
+    }
+
+    // nie oglądałem filmiku z warsztatami, chciałem sam spróbować najpierw. 
 
 
 
 
+// Zadanie 4
+// Warsztat
+// Stwórz plik index.html z pełną strukturą strony HTML5, a w nim formularz
+
+// <form id="form" action="">
+//     <label>Imię: <input type="text" name="fname" value="Krystian"></label>
+//     <br /> 
+//     <label>Nazwisko: <input type="text" name="lname" value="Dziopa"></label>
+//     <br />
+//     <input type="submit" value="Submit">
+// </form>
+// Napisz funkcję, która będzie obsługiwać zdarzenie submit formularza i podepnij ją do elementu formularza jako funkcję zwrotną (ang. callback) obsługującą to zdarzenie.
+
+// Następnie podczas wysyłania formularza:
+
+// Zablokuj jego domyślne działanie (aby formularz się NIE wysyłał)
+// Pobierz wartości obydwu pól formularza do zmiennych (czyli z atrybutami name równymi fname i lname)
+// Wyświetl pobrane wartości pól formularza w konsoli.
 
 
+const formServ = () => {
+    let form = document.querySelector("form")
+    let inp = document.querySelector("form>input")
 
-
-
-
+    console.log(inp)
+    inp.addEventListener("click", (event) => {
+        event.preventDefault()
+        let formValues = document.querySelectorAll("form label input")
+        let name = formValues[0].value
+        let surname = formValues[1].value
+        console.log(`Imię w formularzu to ${name}, a nazwisko to ${surname}`)
+    })
+}
+formServ()
