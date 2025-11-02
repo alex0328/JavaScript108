@@ -151,3 +151,110 @@ const formServ = () => {
     })
 }
 formServ()
+
+
+// Zadanie 5
+
+// Stwórz plik index.html z pełną strukturą strony HTML5, a w nim formularz zawierający:
+
+// pole tekstowe Imie i nazwisko
+// pole tekstowe Adres e-mail
+// checkbox Wszystkie zgody
+// checkbox Zgoda marketingowa 1
+// checkbox Zgoda marketingowa 2
+// Stwórz funkcję validate(), która będzię uruchamiana przed wysłaniem formularza.
+
+// Funkcja validate() ma sprawdzać:
+
+// czy zostało wypełnione pole tekstowe Imie i nazwisko
+// czy zostało wypełnione pole tekstowe Adres e-mail
+// czy adres email zawiera znak @
+// czy został zaznaczony checkbox ze Zgodą marketingową 1
+// W przypadku, gdy któreś z powyższych wymagań nie zostało spełnione, skrypt ma informować internautę o tym jako lista z błędami do poprawy.
+
+// Checkbox Wszystkie zgody po zaznaczeniu ma automatycznie zaznaczać pozostałe checkboxy (tj. Zgoda marketingowa 1 i Zgoda marketingowa 2) i wyłączać możliwość ich odznaczenia.
+
+// Natomiast po odznaczeniu checkbox’a Wszystkie zgody pozostałe checkboxy (tj. Zgoda marketingowa 1 i Zgoda marketingowa 2) mają zostać także odznaczone i ma zostać włączona możliwość ich osobnego zaznaczania.
+
+// Przykładowy wygląd od lewej:
+
+// pustego formularza
+// częściowo wypełnionego formularza z komunikatami walidacji
+
+
+
+
+const firstAgreement = document.querySelector('input[name="firstAgreement"]')
+const secondAgreement = document.querySelector('input[name="2ndAgreement"]')
+const both = document.querySelector('input[name="bothAgreements"]')
+
+const checkAgreements = () => {
+        if (secondAgreement.checked === false || firstAgreement.checked === false) {
+            both.checked = false
+        } else {
+            both.checked = true
+        }
+    }
+
+    firstAgreement.addEventListener('change', checkAgreements);
+    secondAgreement.addEventListener('change', checkAgreements);
+    both.addEventListener('change', event => {
+        if (both.checked === false) {
+            secondAgreement.checked = false
+            firstAgreement.checked = false
+        } else {
+            secondAgreement.checked = true
+            firstAgreement.checked = true
+        }
+        checkAgreements()
+
+    });
+
+const form = document.querySelector('#form2');
+
+const validate = () => {
+    const data = new FormData(form);
+    let userMessage = []
+    const name = (data.get('name') || '').trim();
+    const email = (data.get('email') || '').trim();
+    if (!name) {
+        userMessage.push("Dej imię")
+    } 
+    if (!email) {
+        userMessage.push('Typie, dej maila');
+      } else if (!email.includes('@')) {
+        userMessage.push('Typie, dej maila, ale takiego z małpą');
+      }
+    
+      if (!firstAgreement || !firstAgreement.checked) {
+        userMessage.push('Typie, zaznacz zgodę na pobranie organów');
+      }
+
+    let toDelete = document.querySelectorAll(".mess").forEach(el => el.remove());
+
+
+    for (j of userMessage) {
+        const message = document.createElement('p')
+        message.classList.add('mess')
+        console.log(message)
+        message.innerHTML = j
+        form.appendChild(message)
+    }
+    return true
+}
+
+
+
+let submit = document.querySelector(".submit")
+
+submit.addEventListener('click', event => {
+    event.preventDefault()
+    console.log(validate())
+})
+
+
+
+
+
+
+
